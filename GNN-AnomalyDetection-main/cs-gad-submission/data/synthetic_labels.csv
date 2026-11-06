@@ -1,0 +1,9 @@
+identity,day,scenario,attack_family,variant,n_events,label
+ai-agent,2023-03-24,warmup,benign,benign,6,0
+ai-agent,2023-03-25,warmup,benign,benign,6,0
+ai-agent,2023-03-26,warmup,benign,benign,6,0
+ai-agent,2023-03-27,warmup,benign,benign,7,0
+ai-agent,2023-03-28,1A,prompt_injection,visible,47,1
+ai-agent,2023-04-04,1B,prompt_injection,stealthy,14,1
+cert-admin,2023-04-11,2A,mitm,visible,20,1
+Level6,2023-04-14,2B,mitm,stealthy,3,1

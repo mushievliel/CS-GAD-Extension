@@ -1,0 +1,48 @@
+======================================================================
+VALIDATION REPORT
+======================================================================
+
+1. SCHEMA CHECK
+[PASS] fields: every injected record has the real required fields, no foreign fields
+[PASS] formats: eventVersion/time/UUIDs/mgmt-flags/region/account all valid
+
+2. CATEGORIZER CHECK  (original notebook's rules)
+[PASS] coverage: 100% of 109 injected events classified, 0 unclassified
+     event -> category (distinct):
+       AttachUserPolicy             ModifyExistingResource
+       ChangeResourceRecordSets     ModifyExistingResource
+       CreateAccessKey              CreateObject
+       DescribeInstances            GetInfo
+       DescribeListeners            GetInfo
+       DescribeLoadBalancers        GetInfo
+       DescribeSecret               GetInfo
+       DescribeTargetGroups         GetInfo
+       GetParameter                 GetInfo
+       GetSecretValue               GetInfo
+       ImportCertificate            CreateObject
+       InvokeModel                  EnableObjects
+       ListBuckets                  ListResources
+       ListCertificates             ListResources
+       ListHostedZones              ListResources
+       ListRoles                    ListResources
+       ListSecrets                  ListResources
+       ListUsers                    ListResources
+       ModifyListener               ModifyExistingResource
+
+3. REALISM CHECK  (vs the paper's own 2023 attack days)
+[PASS] volume: injected day volumes {'2023-03-24': 6, '2023-03-25': 6, '2023-03-26': 6, '2023-03-27': 7, '2023-03-28': 47, '2023-04-04': 14, '2023-04-11': 20, '2023-04-14': 3} all within real range [3,3563]
+[PASS] error-rate: injected error rate 5.5% (real 2023: 4.4%); visible attacks raise it, expected
+[PASS] timing: visible bursts minutes-long, stealthy spread across hours (see table below)
+
+4. TRIVIALITY CHECK  (naive rules must miss the stealthy variants)
+     scenario  variant   new-identity  new-service  new-IP
+     1A        visible   False        True        True  
+     1B        stealthy  False        False       False 
+     2A        visible   True         True        True  
+     2B        stealthy  False        False       False 
+[PASS] stealthy-behavioural: stealthy variants evade the behavioural naive rules (new-service, new-IP)
+[PASS] visible-catchable: visible variants are caught by naive rules (expected - they are the easy case)
+
+======================================================================
+Expanded dataset: attack_expanded.json
+======================================================================

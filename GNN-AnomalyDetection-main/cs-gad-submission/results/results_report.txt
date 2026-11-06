@@ -1,0 +1,37 @@
+CS-GAD on expanded dataset - RESULTS REPORT
+Generated: 2026-10-24
+
+OVERALL (all 1607 user-snapshot samples, 109 attack-labeled):
+  ROC-AUC: 0.697   (original CS-GAD reported ~0.72 -> consistent)
+  threshold mean+1std: Precision=0.201 Recall=0.349 F1=0.255 FPR=0.101
+  threshold mean+2std: Precision=0.069 Recall=0.064 F1=0.067 FPR=0.063
+
+==========================================================================
+A. SYNTHETIC ATTACKS - per-scenario detection
+==========================================================================
+scenario                          score     rank  >1std  >2std
+1A prompt_injection visible       0.306   3/23      YES    YES
+1B prompt_injection stealthy      0.689   1/23      YES    YES
+2A mitm visible                   0.059   6/24       no     no
+2B mitm stealthy                  0.170   4/24       no     no
+
+==========================================================================
+B. VISIBLE vs STEALTHY
+==========================================================================
+  visible  : 1/2 flagged at mean+1std  (1A)
+  stealthy : 1/2 flagged at mean+1std  (1B)
+
+==========================================================================
+C. ORIGINAL ATTACKS - detection at their snapshots
+==========================================================================
+attack                              score     rank  >1std  >2std
+cryptojacking (cloud_user)          0.338   2/22      YES    YES
+lateral_movement (cloud_user)       0.403   3/27      YES    YES
+lateral_movement (vpc_peering)      0.013  20/27       no     no
+monitor_exploiting (test)           0.030  17/28       no     no
+targeted_services (sec-check)       0.151   5/28       no     no
+
+==========================================================================
+D. OVERALL ROC-AUC (all snapshots, model labels)
+==========================================================================
+  (computed by cs_gad.py evaluate_scores at end of full run - see run log)
