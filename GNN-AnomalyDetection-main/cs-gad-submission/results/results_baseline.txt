@@ -1,0 +1,23 @@
+# Baseline (Modell et al.) results on the expanded dataset
+# Produced by: code/baseline_modell.py
+# Command (from GNN-AnomalyDetection-main/ repo root):
+#   python cs-gad-submission/code/baseline_modell.py
+# Environment: Python 3 with numpy, pandas, networkx, scikit-learn (no gensim/node2vec)
+# Deterministic (SpectralEmbedding); reproduces Table 6.6 of the report.
+# ----------------------------------------------------------------------
+
+BASELINE (Modell et al.) on the expanded dataset
+bipartite graph: 32 users, 80 services; SpectralEmbedding n_components=74
+
+Rank = the attacker's position among all users at its snapshot (1 = most
+anomalous). A score of 0.000 is the baseline's rule for a user that accessed
+every service it used before; such a user is non-anomalous by construction and
+ties with all the other 0-score users, so its rank is not meaningful. These
+cases are shown as 'n/a (tie)' with the number of tied users, and counted as
+'missed'.
+
+scenario                         score           rank  >1sd  >2sd  verdict
+1A prompt-injection visible      0.308           1/27  True  True  DETECTED
+1B prompt-injection stealthy     0.000   n/a (27 tie) False False  missed
+2A mitm visible                  0.422           1/28  True  True  DETECTED
+2B mitm stealthy                 0.000   n/a (28 tie) False False  missed

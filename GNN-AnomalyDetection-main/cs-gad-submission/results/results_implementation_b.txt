@@ -1,0 +1,38 @@
+# Implementation B (closer-to-faithful reconstruction) - Stage 2 results
+# Produced by: code/cs_gad_colab_v2.py
+# Environment: Google Colab, Python 3 with gensim + node2vec installed
+#   (these libraries do not install in the primary offline environment, so this
+#    script is run in Colab; the output below is that run, seeds 42/1/2).
+# Reproduces Table 6.4 (reproduction control) and Table 6.5 (expanded detection).
+# ----------------------------------------------------------------------
+
+========== REPRODUCTION CONTROL (original data, full cumulative graph) ==========
+graph: 122 nodes, 247 edges  | real node2vec walk
+attack               seed42 detected?        rank    paper
+cryptojacking        YES                     1/30    12/4
+lateral_movement     no                      5/30    25/8
+monitor_exploiting   no                      12/30   detected
+targeted_services    YES                     3/30    20/10
+global FPR: 5% @1sd, 5% @2sd   (one threshold over all users)
+
+========== EXPANDED DATA - four synthetic attacks (full graph, 3 seeds) ==========
+graph: 125 nodes, 261 edges
+scenario                       seed  score     rank   >1sd   >2sd
+1A prompt-injection visible      42  0.063     7/32   False  False
+1B prompt-injection stealthy     42  0.063     7/32   False  False
+2A mitm visible (new user)       42  0.018    14/32   False  False
+2B mitm stealthy (insider)       42  0.058     8/32   False  False
+1A prompt-injection visible       1  0.055     7/32   False  False
+1B prompt-injection stealthy      1  0.055     7/32   False  False
+2A mitm visible (new user)        1  0.005    21/32   False  False
+2B mitm stealthy (insider)        1  0.113     4/32   False  False
+1A prompt-injection visible       2  0.052     7/32   False  False
+1B prompt-injection stealthy      2  0.052     7/32   False  False
+2A mitm visible (new user)        2  0.011    18/32   False  False
+2B mitm stealthy (insider)        2  0.038     9/32   False  False
+
+--- per-scenario across seeds ---
+  1A prompt-injection visible    >1sd 0/3 | >2sd 0/3 | mean 0.057
+  1B prompt-injection stealthy   >1sd 0/3 | >2sd 0/3 | mean 0.057
+  2A mitm visible (new user)     >1sd 0/3 | >2sd 0/3 | mean 0.011
+  2B mitm stealthy (insider)     >1sd 0/3 | >2sd 0/3 | mean 0.070
